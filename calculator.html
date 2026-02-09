@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scientific Calculator</title>
+
+<style>
+    body {
+        background: #1e1e1e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+        background: #2c2c2c;
+        padding: 20px;
+        border-radius: 12px;
+        width: 340px;
+    }
+
+    #display {
+        width: 100%;
+        height: 55px;
+        font-size: 22px;
+        margin-bottom: 12px;
+        text-align: right;
+        padding: 10px;
+        border-radius: 6px;
+        border: none;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .num { background: #444; color: white; }
+    .op { background: #ff9800; color: white; }
+    .func { background: #607d8b; color: white; }
+    .equal { background: #4caf50; color: white; grid-column: span 2; }
+    .clear { background: #f44336; color: white; }
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+        <button class="func" onclick="sin()">sin</button>
+        <button class="func" onclick="cos()">cos</button>
+        <button class="func" onclick="tan()">tan</button>
+        <button class="clear" onclick="clearDisplay()">C</button>
+
+        <button class="func" onclick="log()">log</button>
+        <button class="func" onclick="ln()">ln</button>
+        <button class="func" onclick="sqrt()">√</button>
+        <button class="op" onclick="add('**')">^</button>
+
+        <button class="num" onclick="add('7')">7</button>
+        <button class="num" onclick="add('8')">8</button>
+        <button class="num" onclick="add('9')">9</button>
+        <button class="op" onclick="add('/')">÷</button>
+
+        <button class="num" onclick="add('4')">4</button>
+        <button class="num" onclick="add('5')">5</button>
+        <button class="num" onclick="add('6')">6</button>
+        <button class="op" onclick="add('*')">×</button>
+
+        <button class="num" onclick="add('1')">1</button>
+        <button class="num" onclick="add('2')">2</button>
+        <button class="num" onclick="add('3')">3</button>
+        <button class="op" onclick="add('-')">−</button>
+
+        <button class="num" onclick="add('0')">0</button>
+        <button class="num" onclick="add('.')">.</button>
+        <button class="op" onclick="add('+')">+</button>
+        <button class="func" onclick="del()">DEL</button>
+
+        <button class="func" onclick="add(Math.PI)">π</button>
+        <button class="func" onclick="add(Math.E)">e</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById("display");
+
+    function add(value) {
+        display.value += value;
+    }
+
+    function clearDisplay() {
+        display.value = "";
+    }
+
+    function del() {
+        display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+        try {
+            display.value = eval(display.value);
+        } catch {
+            display.value = "Error";
+        }
+    }
+
+    function toRadians(deg) {
+        return deg * Math.PI / 180;
+    }
+
+    function sin() {
+        display.value = Math.sin(toRadians(eval(display.value)));
+    }
+
+    function cos() {
+        display.value = Math.cos(toRadians(eval(display.value)));
+    }
+
+    function tan() {
+        display.value = Math.tan(toRadians(eval(display.value)));
+    }
+
+    function log() {
+        display.value = Math.log10(eval(display.value));
+    }
+
+    function ln() {
+        display.value = Math.log(eval(display.value));
+    }
+
+    function sqrt() {
+        display.value = Math.sqrt(eval(display.value));
+    }
+</script>
+
+</body>
+</html>
